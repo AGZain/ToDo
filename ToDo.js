@@ -5,7 +5,7 @@ const todoController = require('./controllers/todoController')
 
 app.set('view engine', 'ejs'); //setting up template engine
 
-app.use(express.static('./public'));  //location for static files
+app.use(express.static('public'));  //location for static files
 
 
 todoController(app);
