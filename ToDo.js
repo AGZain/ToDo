@@ -1,8 +1,11 @@
 const express = require('express');
 const app = express();
+const todoController = require('./controllers/todoController')
 
 
+app.set('view engine', 'ejs'); //setting up template engine
 
-app.listen(port, () => {
-    console.log("App up and running on" + port);
-});
+app.use(express.static('./public'));  //location for static files
+
+app.listen(3000);
+console.log('This application is running on port 3000');
