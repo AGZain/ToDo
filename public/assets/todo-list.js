@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
   $('form').on('submit',function(){
       var item = $('form input');
       var todo = {item:item.val()};
@@ -14,7 +15,8 @@ $(document).ready(function(){
     return false;
   });
 
-    $('li').on('cick',function(){
+    $('li').click(function(){
+    console.log('hello');
     var item = $(this).text().replace(/ /g,"-");
     $.ajax({
           type: 'DELETE',
@@ -25,4 +27,5 @@ $(document).ready(function(){
           }
         });
     });
+
 });
