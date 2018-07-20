@@ -3,6 +3,25 @@ var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({extended: false});
 var mongoose = require('mongoose')
 
+//Connected to to db
+
+mongoose.connect('mongodb://test:testpassword1@ds243501.mlab.com:43501/todo');
+
+//Creating schema
+
+var todoSch  = new mongoose.Schema({
+  item: String
+});
+
+//Creating model
+
+var Todo = mongoose.model('Todo',todoSch);
+var itemOne = Todo({item: 'buy car'}).save(function(err){
+  if (err) throw err;
+  console.log('item saved');
+});
+
+
 module.exports = function(app){
 
   app.get('/todo',function(req,resp){
