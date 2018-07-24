@@ -20,8 +20,7 @@ module.exports = function(app){
 
     Todo.find({}, function(err,data){
       if(err) throw err;
-      //resp.render('todo',{todos: data});
-      resp.redirect('/new');
+      resp.render('todo',{todos: data});
     });
 
   });
@@ -32,7 +31,7 @@ module.exports = function(app){
     var todo_new = Todo(req.body).save(function(err,data){
       if (err) throw err;
       //resp.json(data);
-      
+      return resp.redirect('/new');
     });
     
   });
