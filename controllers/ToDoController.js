@@ -15,29 +15,40 @@ var Todo = mongoose.model('Todo',todoSch);
 
 module.exports = function(app){
 
-  app.get('/todo',function(req,resp){
-    //resp.render('todo',{todos: test_data});
-
-    Todo.find({}, function(err,data){
+  // app.get('/todo',function(req,resp){
+  //   Todo.find({}, function(err,data){
+  //     if(err) throw err;
+  //     resp.render('todo',{todos: data});
+  //   });
+  // });
+  app.get('/todo',(req,res) =>{
+    Todo.find({}, (err,data) => {
       if(err) throw err;
-      resp.render('todo',{todos: data});
+      res.render('todo',{todos: data});
+      
     });
-
   });
 
-  app.post('/todo',urlencodedParser,function(req,resp){
-      // test_data.push(req.body);
-      // resp.json(test_data);
-    var todo_new = Todo(req.body).save(function(err,data){
-      if (err) throw err;
-      //resp.json(data);
-      return resp.redirect('/new');
-    });
-    
+  app.post('/todo', (req, res) => {
+    // res.json('hi');
+   // res.redirect(307,'/new');
+   console.log('TTEESSSSSSSTTTIIINGGGGGGGGGGG');
+   return res.redirect(303,'new');
   });
 
+  app.get('/new', (req, res) => {
+    res.json('hi');
+  });
+  // app.post('/todo',urlencodedParser,function(req,resp){
+  //     resp.redirect('new');
+  // });
+
+  // app.get('/new',function(req,resp){
+  //   resp.render('new')
+  // });
+  
   app.delete('/todo/:item',function(req,resp){
-
+    console.log('TTEESSSSSSSTTTIIINGGGGGGGGGGG');
     Todo.find({item:req.params.item.replace(/\-/g," ")}).remove(function(err,data){
       if (err) throw err;
       resp.json(data);
@@ -45,8 +56,11 @@ module.exports = function(app){
     });
   });
 
-  app.get('/new',function(req,resp){
-    
-
-  });
+ 
 };
+
+
+// var todo_new = Todo(req.body).save(function(err,data){
+    //   if (err) throw err;
+    //   resp.json(data);
+    // });
