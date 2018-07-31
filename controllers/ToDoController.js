@@ -12,15 +12,9 @@ var todoSch  = new mongoose.Schema({
 
 //Creating model
 var Todo = mongoose.model('Todo',todoSch);
-
+  
 module.exports = function(app){
 
-  // app.get('/todo',function(req,resp){
-  //   Todo.find({}, function(err,data){
-  //     if(err) throw err;
-  //     resp.render('todo',{todos: data});
-  //   });
-  // });
   app.get('/todo',(req,res) =>{
     Todo.find({}, (err,data) => {
       if(err) throw err;
@@ -29,11 +23,13 @@ module.exports = function(app){
     });
   });
 
-  app.post('/todo', (req, res) => {
-    // res.json('hi');
-   // res.redirect(307,'/new');
-   console.log('TTEESSSSSSSTTTIIINGGGGGGGGGGG');
-   return res.redirect(303,'new');
+  app.post('/todo',urlencodedParser,function(req,resp){
+          // test_data.push(req.body);
+          // resp.json(test_data);
+    var todo_new = Todo(req.body).save(function(err,data){
+    if (err) throw err;
+    resp.json(data);
+    });
   });
 
   app.get('/new', (req, res) => {
@@ -60,7 +56,3 @@ module.exports = function(app){
 };
 
 
-// var todo_new = Todo(req.body).save(function(err,data){
-    //   if (err) throw err;
-    //   resp.json(data);
-    // });
